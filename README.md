@@ -1,51 +1,184 @@
 <!---
 {
-  "depends_on": [],
+  "id": "04c71741-b965-41c0-936d-62f513e73df6",
+  "depends_on": ["293aa994-02be-42eb-8859-f7e21029a875"],
   "author": "Stephan Bökelmann",
-  "first_used": "2025-03-17",
-  "keywords": ["learning", "exercises", "education", "practice"]
+  "first_used": "2025-06-06",
+  "keywords": ["PlantUML", "PUML", "diagram", "UML", "Kroki", "SVG", "installation"]
 }
 --->
 
-# Learning Through Exercises
+# Introduction to PlantUML: Generating Diagrams in Text
 
-## Introduction
-Learning by doing is one of the most effective methods to acquire new knowledge and skills. Rather than passively consuming information, actively engaging in problem-solving fosters deeper understanding and long-term retention. By working through structured exercises, students can grasp complex concepts in a more intuitive and applicable way. This approach is particularly beneficial in technical fields like programming, mathematics, and engineering.
+> In this exercise you will learn how to install PlantUML and generate diagrams using textual descriptions. Furthermore we will explore how to render different types of diagrams into SVG format, allowing easy integration into documents, websites, or version-controlled repositories.
+
+PlantUML (PUML) is a powerful tool that allows you to create a wide variety of diagrams from plain text descriptions. It is widely used in software documentation, architecture design, and technical communication because it simplifies the creation and maintenance of diagrams. Instead of manually drawing diagrams, you write simple scripts that define the structure and relationships, and PlantUML generates the graphical output for you.
+
+PlantUML supports multiple diagram types, including UML class diagrams, sequence diagrams, activity diagrams, and component diagrams, among others. This textual approach to diagramming offers several advantages: it is version-controllable, human-readable, and easy to automate in CI/CD pipelines. Moreover, diagrams can be updated quickly by editing text, without the need to redraw the entire diagram.
+
+In this exercise, you will start by installing PlantUML directly using your package manager. Then you will create and render four different types of diagrams: class diagram, sequence diagram, activity diagram, and component diagram. You will also learn how to export these diagrams into SVG format, which is ideal for high-quality scalable graphics suitable for web and print usage.
 
 ### Further Readings and Other Sources
-- [The Importance of Practice in Learning](https://www.sciencedirect.com/science/article/pii/S036013151300062X)
-- "The Art of Learning" by Josh Waitzkin
-- [How to Learn Effectively: 5 Key Strategies](https://www.edutopia.org/article/5-research-backed-learning-strategies)
+
+* [PlantUML Official Documentation](https://plantuml.com/)
+* [PlantUML Language Reference Guide (PDF)](https://plantuml.com/guide)
+* [Introduction to PlantUML on YouTube](https://www.youtube.com/watch?v=Tv5PHnzsF7s)
+
+---
 
 ## Tasks
-1. **Write a Summary**: Summarize the concept of "learning by doing" in 3-5 sentences.
-2. **Example Identification**: List three examples from your own experience where learning through exercises helped you understand a topic better.
-3. **Create an Exercise**: Design a simple exercise for a topic of your choice that someone else could use to practice.
-4. **Follow an Exercise**: Find an online tutorial that includes exercises and complete at least two of them.
-5. **Modify an Existing Exercise**: Take a basic problem from a textbook or online course and modify it to make it slightly more challenging.
-6. **Pair Learning**: Explain a concept to a partner and guide them through an exercise without giving direct answers.
-7. **Review Mistakes**: Look at an exercise you've previously completed incorrectly. Identify why the mistake happened and how to prevent it in the future.
-8. **Time Challenge**: Set a timer for 10 minutes and try to solve as many simple exercises as possible on a given topic.
-9. **Self-Assessment**: Create a checklist to evaluate your own performance in completing exercises effectively.
-10. **Reflect on Progress**: Write a short paragraph on how this structured approach to exercises has influenced your learning.
 
-<details>
-  <summary>Tip for Task 5</summary>
-  Try making small adjustments first, such as increasing the difficulty slightly or adding an extra constraint.
-</details>
+### Task 0 — Install PlantUML
+
+Install PlantUML directly via `apt`:
+
+```bash
+sudo apt install plantuml -y
+```
+
+Verify the installation:
+
+```bash
+plantuml -version
+```
+
+Create a directory for your diagrams:
+
+```bash
+mkdir diagrams
+cd diagrams
+```
+
+### Task 1 — Generate a Class Diagram
+
+Create a text file `class-diagram.puml` with the following content:
+
+```puml
+@startuml
+class Animal {
+  +String name
+  +int age
+  +void makeSound()
+}
+class Dog {
+  +String breed
+  +void bark()
+}
+Animal <|-- Dog
+@enduml
+```
+
+Now generate an SVG diagram:
+
+```bash
+plantuml -tsvg class-diagram.puml
+```
+
+You will see a file `class-diagram.svg` created in your directory.
+
+### Task 2 — Generate a Sequence Diagram
+
+Create `sequence-diagram.puml`:
+
+```puml
+@startuml
+Alice -> Bob: Hello Bob, how are you?
+Bob --> Alice: I am fine, thanks!
+@enduml
+```
+
+Generate SVG:
+
+```bash
+plantuml -tsvg sequence-diagram.puml
+```
+
+### Task 3 — Generate an Activity Diagram
+
+Create `activity-diagram.puml`:
+
+```puml
+@startuml
+start
+:Initialize;
+if (Valid Input?) then (yes)
+  :Process Data;
+else (no)
+  :Display Error;
+endif
+stop
+@enduml
+```
+
+Generate SVG:
+
+```bash
+plantuml -tsvg activity-diagram.puml
+```
+
+### Task 4 — Generate a Component Diagram
+
+Create `component-diagram.puml`:
+
+```puml
+@startuml
+[User] --> (Login Service)
+(Login Service) --> (Authentication System)
+(Authentication System) --> (Database)
+@enduml
+```
+
+Generate SVG:
+
+```bash
+plantuml -tsvg component-diagram.puml
+```
+
+### Task 5 — Inspect Your Generated SVG Files
+
+After generating the SVG files, it is highly recommended to inspect them. SVG files are plain text files written in XML, which means you can explore both their structure and content.
+
+* Open the file directly in `vim`:
+
+```bash
+vim class-diagram.svg
+```
+
+* Use `less` to scroll through the file:
+
+```bash
+less class-diagram.svg
+```
+
+* For a graphical preview, open the file in your web browser or use an online viewer such as [svgviewer.dev](https://www.svgviewer.dev/).
+
+* For advanced inspection and editing, open the SVG in a vector graphic editor such as Inkscape:
+
+```bash
+inkscape class-diagram.svg
+```
+
+Pay attention to how PlantUML translates your text definitions into SVG shapes and elements. This understanding is especially valuable if you plan to post-process or integrate these diagrams into larger documents or pipelines.
+
+---
 
 ## Questions
-1. What are the main benefits of learning through exercises compared to passive learning?
-2. How do exercises improve long-term retention?
-3. Can you think of a subject where learning through exercises might be less effective? Why?
-4. What role does feedback play in learning through exercises?
-5. How can self-designed exercises improve understanding?
-6. Why is it beneficial to review past mistakes in exercises?
-7. How does explaining a concept to someone else reinforce your own understanding?
-8. What strategies can you use to stay motivated when practicing with exercises?
-9. How can timed challenges contribute to learning efficiency?
-10. How do exercises help bridge the gap between theory and practical application?
+
+1. In your own words, explain the advantage of describing diagrams in PlantUML's text format instead of drawing them manually.
+2. What is the benefit of generating SVG output compared to raster formats like PNG?
+3. Describe the structure of a simple PlantUML script. What key markers define the start and end of a diagram?
+4. Open one of your generated SVG files in `vim` or `less`. What XML elements do you observe? Which parts seem to correspond to your original PlantUML definitions?
+5. Use Inkscape or `svgviewer.dev` to open one of your SVG files. Can you identify individual diagram elements like arrows, text, or boxes? How would you modify an element manually if needed?
+6. When would you prefer to use local PlantUML rendering versus a service like Kroki.io?
+7. What potential security considerations might arise when uploading sensitive diagrams to online rendering services?
+
+---
 
 ## Advice
-Practice consistently and seek out diverse exercises that challenge different aspects of a topic. Combine exercises with reflection and feedback to maximize your learning efficiency. Don't hesitate to adapt exercises to fit your own needs and ensure that you're actively engaging with the material, rather than just going through the motions.
+
+While PlantUML running locally offers you full control over diagram generation, it is not the only way to render PUML diagrams. Online services like [Kroki.io](https://kroki.io/) allow rendering diagrams directly via HTTP API without installing any software. Kroki supports multiple diagramming languages beyond PlantUML, such as Mermaid, Graphviz, and BlockDiag. This can be extremely useful for web-based integrations or lightweight setups.
+
+However, relying on online renderers comes with trade-offs. Local rendering via PlantUML ensures you are not dependent on external services, which is critical for sensitive or private projects. On the other hand, Kroki offers quick previews and easy integration for collaborative documents, especially for markdown-based documentation systems like GitLab or MkDocs.
+
+For production or automated pipelines, you might consider hybrid approaches: use PlantUML locally for core development, and online services for lightweight documentation preview. Both approaches have their place depending on the context and constraints of your project.
 
