@@ -165,12 +165,36 @@ Pay attention to how PlantUML translates your text definitions into SVG shapes a
 ## Questions
 
 1. In your own words, explain the advantage of describing diagrams in PlantUML's text format instead of drawing them manually.
+
+You can automate the generation by using variable inputs, which eliminates the need to redraw or adjust the diagram manually for every change.
+
 2. What is the benefit of generating SVG output compared to raster formats like PNG?
+
+SVG is better suited for informative diagrams because it's scalable without loss of quality, easier to modify, and can be scripted or manipulated with code.
+
 3. Describe the structure of a simple PlantUML script. What key markers define the start and end of a diagram?
+
+A PlantUML diagram starts with @startuml and ends with @enduml. These markers define the diagram’s boundaries.
+
 4. Open one of your generated SVG files in `vim` or `less`. What XML elements do you observe? Which parts seem to correspond to your original PlantUML definitions?
+
+The SVG file contains XML elements like <text>, <line>, and <rect> that represent diagram components. 
+These elements correspond directly to the shapes and labels defined in your PlantUML source.
+The complete description of the diagram is inlucde the svg as text.
+
 5. Use Inkscape or `svgviewer.dev` to open one of your SVG files. Can you identify individual diagram elements like arrows, text, or boxes? How would you modify an element manually if needed?
+
+Yes, using tools like Inkscape or svgviewer.dev, you can identify individual diagram elements such as arrows, text labels, or boxes. 
+Each element is represented as an SVG tag (e.g., <line>, <text>, <rect>), and you can modify them manually by editing the SVG file’s XML code—for example, changing coordinates, colors, or text directly.
+
 6. When would you prefer to use local PlantUML rendering versus a service like Kroki.io?
+
+Kroki is useful for quick previews and catching errors early because the output is rendered immediately. Once the diagram structure is correct, 
+I prefer local rendering for automation and working with sensitive data. Kroki is more suitable for one-off diagrams that don't contain confidential information.
+
 7. What potential security considerations might arise when uploading sensitive diagrams to online rendering services?
+
+Uploading diagrams to online services like Kroki.io may expose sensitive information, since the diagram content is sent to an external server. This can lead to data leaks, unauthorized access, or unintended sharing of confidential logic or system architecture.
 
 ---
 
